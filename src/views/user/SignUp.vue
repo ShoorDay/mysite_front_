@@ -1,9 +1,9 @@
 <template>
   <div id="sign" style="margin-top: 25px">
     <el-row type="flex" justify="center">
-      <el-col :xs="23" :sm="16" :md="8" :lg="6" :xl="6">
+      <el-col :xs="23" :sm="10" :md="8" :lg="6" :xl="6">
         <el-card>
-          <sign-in-form></sign-in-form>
+          <sign-up-form></sign-up-form>
         </el-card>
       </el-col>
     </el-row>
@@ -11,10 +11,10 @@
 </template>
 
 <script>
-import SignInForm from "@/components/user/SignInForm.vue";
+import SignUpForm from "@/components/user/SignUpForm.vue";
 
 export default {
-  components: { SignInForm }
+  components: { SignUpForm }
 };
 </script>
 

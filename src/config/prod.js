@@ -1,5 +1,5 @@
 let config = require("./base");
 
-config.url = "example.com";
+config.url = "shoor.xyz";
 
 module.exports = config;

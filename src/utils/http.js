@@ -1,21 +1,37 @@
 import axios from "axios";
-import { Message } from "element-ui";
+import { Notification } from "element-ui";
+import jwt from "@/utils/jwt.js";
 const config = require("@/config/config.js");
-import { jwt, isExpired } from "@/utils/jwt.js";
 
-const errorHandle = (status, others) => {
+const errorHandle = (status, data) => {
+  const message = data.message || data.detail || data.msg;
   switch (status) {
     case 401:
-      Message("未登录状态，跳转登录页");
+      Notification.error({
+        title: "未登录状态，跳转登录页",
+        message: message
+      });
       break;
     case 403:
-      Message("登录过期，请重新登录");
+      Notification.error({
+        title: "登录过期，请重新登录",
+        message: message
+      });
       break;
     case 404:
-      Message("请求的资源不存在");
+      Notification.error({
+        title: "请求的资源不存在",
+        message: message
+      });
+      break;
+    case 429:
+      Notification.warning({
+        title: "请求过于频繁",
+        message: message
+      });
       break;
     default:
-      console.log(others);
+      console.log(message);
   }
 };
 
@@ -27,14 +43,14 @@ const instance = axios.create({
 instance.interceptors.request.use(
   config => {
     const access = window.localStorage.getItem("access");
-    console.log(access);
     if (access) {
-      const payload = jwt(access);
-      if (!isExpired(payload["exp"])) {
-        console.log(isExpired(payload["exp"]));
+      const payload = jwt.decode(access);
+      console.log(jwt.isExpired(payload["exp"]));
+      if (!jwt.isExpired(payload["exp"])) {
         config.headers.Authorization = "Bearer " + access;
       }
     }
+    console.log(config);
     return config;
   },
   error => {
@@ -49,7 +65,7 @@ instance.interceptors.response.use(
   error => {
     const { response } = error;
     if (response) {
-      errorHandle(response.status, response.data.message);
+      errorHandle(response.status, response.data);
       return Promise.reject(response);
     } else {
       window.localStorage.setItem("network", false);

@@ -2,15 +2,13 @@
 
 body {
     color: $black;
-}
-
-a, p a code {
-    color: $green;
-    font-weight: 500;
-    text-decoration: none;
+    background-color: #f6f6f6;
 }
 
 a {
+    color: $green;
+    text-decoration: none;
+
     &:hover {
         color: $orange;
     }
@@ -21,7 +19,7 @@ code {
 }
 
 pre {
-    background-color: $backgrary ;
+    background-color: $backgrary;
     border-radius: 3px;
     font-size: 85%;
     line-height: 1.45;
@@ -51,37 +49,21 @@ hr {
     padding: 0;
 }
 
-// 表格
 table {
     border-collapse: collapse;
-}
 
-thead {
-    display: table-header-group;
-    vertical-align: middle;
-    border-color: inherit;
-}
+    td, th {
+        border: 1px solid #dfe2e5;
+        padding: 0.6em 1em;
+    }
 
-tbody {
-    display: table-row-group;
-    vertical-align: middle;
-    border-color: inherit;
-}
+    tr {
+        border-top: 1px solid #dfe2e5;
+    }
 
-td, th {
-    border: 1px solid #dfe2e5;
-    padding: 0.6em 1em;
-}
-
-tr:nth-child(2n) {
-    background-color: $backgrary ;
-}
-
-tr {
-    border-top: 1px solid #dfe2e5;
-    display: table-row;
-    vertical-align: inherit;
-    border-color: inherit;
+    tr:nth-child(2n) {
+        background-color: #f6f8fa;
+    }
 }
 
 blockquote {

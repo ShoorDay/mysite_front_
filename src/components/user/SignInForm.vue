@@ -22,7 +22,7 @@
 </template>
 
 <script>
-import { jwt } from "@/utils/jwt.js";
+import jwt from "@/utils/jwt.js";
 
 export default {
   data() {
@@ -40,20 +40,20 @@ export default {
   },
   methods: {
     onSubmit() {
-      console.log(this.form);
-      this.$api.user.getToken(
+      const this_ = this;
+      this.$api.user.authenticate(
         { username: this.form.username, password: this.form.password }
       ).then(
         res => {
-          const payload = jwt(res.data.access);
+          const payload = jwt.decode(res.data.access);
           window.localStorage.setItem("id", payload.user_id);
           window.localStorage.setItem("access", res.data.access);
-          if (this.form.storageToken) {
+          if (this_.form.storageToken) {
             window.localStorage.setItem("refresh", res.data.refresh);
           }
         },
         err => {
-          this.$message.error("用户名或者密码错误, 请仔细检查\n" + err.data);
+          this_.$message.error("用户名或者密码错误, 请仔细检查\n" + err.data);
         }
       );
     }

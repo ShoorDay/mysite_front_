@@ -1,6 +1,8 @@
 const Home = () => import("@/views/blog/Home.vue");
 const PostDetail = () => import("@/views/blog/PostDetail.vue");
 const Editor = () => import("@/views/blog/Editor.vue");
+const TagDetail = () => import("@/views/blog/TagDetail.vue");
+const CategoryDetail = () => import("@/views/blog/CategoryDetail.vue");
 
 export default [
   {
@@ -17,6 +19,22 @@ export default [
     component: PostDetail,
     meta: {
       title: "博客"
+    }
+  },
+  {
+    path: "/tag/:id",
+    name: "tag_detail",
+    component: TagDetail,
+    meta: {
+      title: "标签"
+    }
+  },
+  {
+    path: "/category/:id",
+    name: "category_detail",
+    component: CategoryDetail,
+    meta: {
+      title: "分类"
     }
   },
   {
