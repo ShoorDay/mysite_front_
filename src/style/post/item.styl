@@ -1,0 +1,49 @@
+@import '~@/style/config.styl';
+
+.post-item {
+    margin-top: 10px;
+}
+
+.title {
+    text-align: center;
+    color: $black;
+    width: 100%;
+    float: left;
+    font-size: 18px;
+    padding-bottom: 5px;
+
+    &:hover {
+        color: $green;
+    }
+}
+
+.meta {
+    text-align: center;
+    font-size: 13px;
+    color: $darkgray;
+
+    & > span {
+        padding-right: 5px;
+    }
+
+    .time {
+    }
+}
+
+div.tags {
+    a {
+        color: $black;
+        margin-right: 0.4rem;
+        padding: 0.2rem 0.6rem;
+        border-radius: 0.6rem;
+        background: $gray;
+        text-decoration: none;
+        font-size: 12px;
+        cursor: pointer;
+        font-size: 13px;
+
+        &:hover {
+            background: $darkgray;
+        }
+    }
+}

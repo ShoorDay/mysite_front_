@@ -1,0 +1,53 @@
+[class^="icon-"],
+[class*=" icon-"] {
+    box-sizing: border-box;
+    display: inline-block;
+    cursor: pointer;
+    height: 28px;
+    width: 28px;
+    margin: 6px 0 5px 0px;
+    font-size: 15px;
+    padding: 4.5px 6px 5px 3.5px;
+    color: #757575;
+    border-radius: 5px;
+    text-align: center;
+    background: none;
+    border: none;
+    outline: none;
+    line-height: 1;
+}
+
+.toolbar [class^="icon-"]:before,
+.toolbarn [class*=" icon-"]:before {
+    display: inline-block;
+    text-decoration: inherit;
+    width: 1em;
+    margin-right: .2em;
+    text-align: center;
+
+    /* For safety - reset parent styles, that can break glyph codes*/
+    font-variant: normal;
+    text-transform: none;
+
+    /* fix buttons height, for twitter bootstrap */
+    line-height: 1em;
+
+    /* Animation center compensation - margins should be symmetric */
+    /* remove if not needed */
+    margin-left: .2em;
+
+    /* you can be more comfortable with increased icons size */
+    /* font-size: 120%; */
+
+    /* Font smoothing. That was taken from TWBS */
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+
+}
+
+[class^="icon-"]:hover,
+[class*=" icon-"]:hover {
+    color: rgba(0, 0, 0, 0.8);
+    background: #e9e9eb;
+    text-shadow: 1px 1px 1px rgba(127, 127, 127, 0.3);
+}

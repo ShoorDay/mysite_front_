@@ -1,0 +1,67 @@
+<template>
+  <div class="post-item">
+    <el-card shadow="hover">
+      <router-link v-if="image" :to="{name:'post_detail', params:{id: id}}">
+        <img :src="image" />
+      </router-link>
+      <div>
+        <router-link :to="{name:'post_detail', params:{id: id}}">
+          <div class="title">{{ title }}</div>
+        </router-link>
+          <div class="meta">
+            <span class="author icon-people">{{ author }}</span>
+            <span
+              class="time icon-calendar"
+              :title="`创建于${created} | 修改于${updated}`"
+            >{{ created.slice(0, 9) }}</span>
+            <span class="icon-folder" v-if="category.name">{{ category.name }}</span>
+          </div>
+          <div class="excerpt" ref="md" v-html="excerpt"></div>
+          <div class="tags">
+            <span v-for="tag in tags" :key="tag.id">
+              <router-link :to="{name:'home'}">{{ tag.name }}</router-link>
+            </span>
+          </div>
+      </div>
+    </el-card>
+  </div>
+</template>
+
+<script>
+export default {
+  props: {
+    id: {
+      type: Number,
+      required: true
+    },
+    image: {
+      type: String
+    },
+    title: {
+      type: String,
+      default: "无标题"
+    },
+    author: String,
+    excerpt: {
+      type: String,
+      required: true
+    },
+    created: {
+      type: String
+    },
+    updated: {
+      type: String
+    },
+    tags: Array,
+    category: Object
+  },
+  created() {
+    this.$nextTick(this.Prism.highlightAll());
+    console.log(this.tags);
+  }
+};
+</script>
+
+<style lang="stylus" scoped>
+@import '~@/style/post/item.styl';
+</style>
