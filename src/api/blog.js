@@ -9,6 +9,9 @@ export default {
   postRetrieve(id, config) {
     return http.get(baseURL + "posts/" + id + "/", config);
   },
+  postCreate(data, config) {
+    return http.post(baseURL + "posts/", data, config);
+  },
   tagList(config) {
     return http.get(baseURL + "tags/", config);
   },

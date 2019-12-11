@@ -1,32 +1,33 @@
-
-
-
 export default {
   namespaced: true,
   state: {
     is_authenticated: false,
-    id: "",
+    user_id: 0,
     username: "",
     nickname: "",
     isAdmin: false,
     email: "",
-    email_is_active: false,
-    token: {
-      access: "",
-      refresh: ""
-    }
+    email_is_active: false
   },
   mutations: {
     authenticate(state, payload) {
       console.log(payload);
       state.is_authenticated = true;
-      state.id = payload.id || "";
+      state.user_id = payload.user_id || "";
       state.username = payload.username || "";
-      state.username = payload.nickname || "无昵称";
+      state.nickname = payload.nickname || "无昵称";
       state.email = payload.email || "";
       state.email_is_active = payload.email_is_active || "";
-      state.token.access = payload.access || "";
-      state.token.refresh = payload.refresh || "";
+    },
+    signOUt(state) {
+      state.is_authenticated = false;
+      state.user_id = "";
+      state.username = "";
+      state.username = "";
+      state.email = "";
+      state.email_is_active = "";
+      state.token.access = "";
+      state.token.refresh = "";
     }
   },
   actions: {},

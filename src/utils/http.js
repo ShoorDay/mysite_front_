@@ -4,7 +4,7 @@ import jwt from "@/utils/jwt.js";
 const config = require("@/config/config.js");
 
 const errorHandle = (status, data) => {
-  const message = data.message || data.detail || data.msg;
+  const message = data.message || data.detail || data.msg || "错误";
   switch (status) {
     case 401:
       Notification.error({
@@ -31,6 +31,7 @@ const errorHandle = (status, data) => {
       });
       break;
     default:
+      console.log(data);
       console.log(message);
   }
 };
@@ -45,7 +46,6 @@ instance.interceptors.request.use(
     const access = window.localStorage.getItem("access");
     if (access) {
       const payload = jwt.decode(access);
-      console.log(jwt.isExpired(payload["exp"]));
       if (!jwt.isExpired(payload["exp"])) {
         config.headers.Authorization = "Bearer " + access;
       }

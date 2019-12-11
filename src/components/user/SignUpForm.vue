@@ -47,9 +47,8 @@ export default {
   methods: {
     onSubmit() {
       const this_ = this;
-      console.log(this.form);
       this.nickname = this.nickname || this.username;
-      this.$api.user.signUp(this.form).then(
+      this.$api.user.signUp(this.form, {}).then(
         res => {
           this_.$store.commit("user/authenticate", res.data);
         },

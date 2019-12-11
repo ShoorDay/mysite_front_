@@ -15,9 +15,13 @@
 
 <script>
 import NavBar from "@/components/basic/NavBar.vue";
+
 export default {
   name: "App",
-  components: { NavBar }
+  components: { NavBar },
+  beforeCreate() {
+    let auth = this.$auth.authenticate(this);
+  }
 };
 </script>
 

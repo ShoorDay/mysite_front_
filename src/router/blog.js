@@ -42,7 +42,8 @@ export default [
     name: "editor",
     component: Editor,
     meta: {
-      title: "编辑"
+      title: "编辑",
+      requireAuth: true
     }
   }
 ];

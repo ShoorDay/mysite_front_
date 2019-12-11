@@ -42,15 +42,16 @@ export default {
     onSubmit() {
       const this_ = this;
       this.$api.user.authenticate(
-        { username: this.form.username, password: this.form.password }
+        { username: this.form.username, password: this.form.password }, {}
       ).then(
         res => {
           const payload = jwt.decode(res.data.access);
-          window.localStorage.setItem("id", payload.user_id);
+          window.localStorage.setItem("user_id", payload.user_id);
           window.localStorage.setItem("access", res.data.access);
           if (this_.form.storageToken) {
             window.localStorage.setItem("refresh", res.data.refresh);
-          }
+          };
+          this_.$emit("sign_in")
         },
         err => {
           this_.$message.error("用户名或者密码错误, 请仔细检查\n" + err.data);

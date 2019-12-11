@@ -1,24 +1,25 @@
 <template>
   <div class="editor">
-    <slot name="header"></slot>
-      <tool-bar @insert="insertMd" @save="save" @shift="shift"></tool-bar>
-    <div class="preview" ref="preview" v-html="compiledMd" v-if="preview"></div>
-    <div class="markdown" v-else>
-      <textarea
-        name="markdown"
-        ref="markdown"
-        v-model="md"
-        :placeholder="placeholder"
-        @keyup.ctrl.alt.c.native="insertMd('code')"
-        @keyup.ctrl.b.exact.native="insertMd('bold')"
-        @keyup.ctrl.i.exact.native="insertMd('italic')"
-        @keyup.ctrl.l.exact.native="insertMd('link')"
-        @keyup.ctrl.q.exact.native="insertMd('quote')"
-      ></textarea>
-    </div>
-    <div class="bottom-tool-bar">
-      <span @click="shift">预览</span>
-    </div>
+    <el-tabs type="border-card" v-model="activeTab">
+      <el-tab-pane label="Write" name="write">
+        <tool-bar @insert="insertMd"></tool-bar>
+        <el-input
+          ref="md_body"
+          type="textarea"
+          :autosize="autosize"
+          placeholder="# Hello"
+          v-model="md"
+          @keyup.ctrl.alt.c.native="insertMd('code')"
+          @keyup.ctrl.b.exact.native="insertMd('bold')"
+          @keyup.ctrl.i.exact.native="insertMd('italic')"
+          @keyup.ctrl.l.exact.native="insertMd('link')"
+          @keyup.ctrl.q.exact.native="insertMd('quote')"
+        ></el-input>
+      </el-tab-pane>
+      <el-tab-pane label="Preview" name="preview" ref="preview">
+        <div ref="html_body" class="md" v-html="compiledMd"></div>
+      </el-tab-pane>
+    </el-tabs>
   </div>
 </template>
 
@@ -31,26 +32,32 @@ export default {
     ToolBar
   },
   props: {
-    placeholder: {
-      type: String,
-      default: "# Hello"
+    hasTitle: {
+      type: Boolean,
+      default: true
     },
+    autosize: {
+      type: Object,
+      default() {
+        return {
+          minRows: 4,
+          maxRows: 8
+        };
+      }
+    }
   },
   data() {
     return {
       title: "",
       md: "",
       compiledMd: "",
-      preview: false
+      activeTab: "write"
     };
   },
   methods: {
-    shift() {
-      this.preview = !this.preview;
-    },
     insertMd(action) {
       action = actions[action];
-      var t = this.$refs.markdown;
+      var t = this.$refs.md_body.$refs.textarea;
       t.focus();
       let temp = t.value;
       let startPos;
@@ -111,8 +118,8 @@ export default {
     }
   },
   watch: {
-    preview: function(val) {
-      if (val) {
+    activeTab: function(val) {
+      if (val === "preview") {
         this.compiledMd = this.$md.render(this.md);
       }
     },
@@ -126,7 +133,11 @@ export default {
     let this_ = this;
     document.onkeyup = function(e) {
       if (e.key == "/" && e.ctrlKey == true) {
-        this_.preview = !this_.preview;
+        if (this_.activeTab === "write") {
+          this_.activeTab = "preview";
+        } else {
+          this_.activeTab = "write";
+        }
       } else if (e.key == "s" && e.ctrlKey == true) {
         this_.$emit("save");
       }
@@ -142,6 +153,14 @@ export default {
 };
 </script>
 
+<style>
+div.editor .el-tabs--border-card > .el-tabs__content {
+  padding-top: 0;
+}
+</style>
+
 <style lang="stylus" scoped>
-@import '~@/style/editor/body.styl';
+div.md {
+  padding-top: 4px;
+}
 </style>

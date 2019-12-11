@@ -7,13 +7,14 @@ import api from "./api";
 import md from "./utils/markdown/index.js";
 import Prism from "Prism";
 import keycodes from "./utils/keycodes.js";
+import localAuth from "./utils/localAuth";
 
-// console.log(Prism);
 Vue.config.productionTip = false;
 
 Vue.use(keycodes);
 Vue.prototype.$api = api;
 Vue.prototype.$md = md;
+Vue.prototype.$auth = localAuth;
 Vue.prototype.Prism = Prism;
 
 new Vue({

@@ -13,13 +13,17 @@
           :tags="post.tags_display"
           :category="post.category_display"
         ></post-item>
+        <div class="load">
+          <span v-if="loading"><i class="el-icon-loading"></i> 加载中<i class="el-icon-more"></i></span>
+          <span v-else-if="next && !loading" @click="load">点击加载更多 <i class="el-icon-more"></i></span>
+        </div>
       </el-col>
       <el-col :xs="24" :sm="24" :md="5">
         <home-tags :tags="tags"></home-tags>
         <home-categories :categories="categories"></home-categories>
       </el-col>
     </el-row>
-    </div>
+  </div>
 </template>
 
 <script>
@@ -36,16 +40,16 @@ export default {
   },
   data() {
     return {
-      posts: {},
+      posts: [],
       next: "",
       previous: "",
       categories: [],
-      tags: []
+      tags: [],
+      loading: false
     };
   },
-  watch: {},
   created() {
-    this.$api.blog.postList({ params: { page_size: 10 } }).then(res => {
+    this.$api.blog.postList({ params: { page_size: 2 } }).then(res => {
       this.posts = res.data.results;
       this.next = res.data.next;
       this.previous = res.data.previous;
@@ -54,15 +58,26 @@ export default {
       this.tags = res.data.results;
     });
     this.$api.blog.categoryList({}).then(res => {
-      this.categories = res.data.results
-    })
-  }
-  // mounted() {
-  //   this.Prism.highlightAll();
-  // },
-  // updated() {
-  //   this.Prism.highlightAll();
-  // }
+      this.categories = res.data.results;
+    });
+  },
+  methods: {
+    load() {
+      this.loading = true;
+      const this_ = this;
+      this.$api.http({ baseURL: this.next }).then(
+        res => {
+          this_.posts.push.apply(this_.posts, res.data.results);
+          this.next = res.data.next;
+          this.previous = res.data.previous;
+        },
+        err => {}
+      );
+      this.loading = false;
+    }
+  },
+  computed: {}
 };
 </script>
-<style lang="stylus"></style>
+<style lang="stylus" scoped>
+</style>

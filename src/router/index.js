@@ -1,5 +1,7 @@
 import Vue from "vue";
 import VueRouter from "vue-router";
+import $auth from "@/utils/localAuth";
+
 import Home from "@/views/Home.vue";
 import blog from "./blog.js";
 import user from "./user.js";
@@ -43,8 +45,22 @@ const router = new VueRouter({
 });
 
 router.beforeEach((to, from, next) => {
-  document.title = to.matched[0].meta.title;
-  next();
+  const meta = to.matched[0].meta;
+  document.title = meta.title;
+  if (to.meta.requireAuth) {
+    if ($auth.check()) {
+      next();
+    } else {
+      next({
+        name: "sign_in",
+        query: {
+          redirect: to.fullPath
+        }
+      });
+    }
+  } else {
+    next();
+  }
 });
 
 export default router;
