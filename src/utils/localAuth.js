@@ -52,7 +52,7 @@ export default {
           $vm.$api.user.userRetrieve(auth.profile.user_id, {}).then(
             res => {
               auth.profile = res.data;
-              auth.profile.user_id = res.dataid;
+              auth.profile.user_id = res.data.id;
               $vm.$store.commit("user/authenticate", auth.profile);
             },
             err => {
@@ -75,10 +75,10 @@ export default {
     if (local.user_id && local.token.access) {
       const payload = jwt.decode(local.token.access);
       if (jwt.isExpired(payload["exp"])) {
-        return false;
+        return [false, local.user_id];
       }
-      return true;
+      return [true, local.user_id];
     }
-    return false;
+    return [false, local.user_id];
   }
 };

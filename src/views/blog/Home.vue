@@ -1,22 +1,8 @@
 <template>
   <div>
     <el-row :gutter="15">
-      <el-col :xs="24" :sm="24" :md="{span: 13, offset:3}">
-        <post-item
-          v-for="post in posts" :key="post.id"
-          :id="post.id"
-          :title="post.title"
-          :excerpt="$md.render(post.excerpt)"
-          :created="post.created"
-          :updated="post.updated"
-          :author="post.author_display.username"
-          :tags="post.tags_display"
-          :category="post.category_display"
-        ></post-item>
-        <div class="load">
-          <span v-if="loading"><i class="el-icon-loading"></i> 加载中<i class="el-icon-more"></i></span>
-          <span v-else-if="next && !loading" @click="load">点击加载更多 <i class="el-icon-more"></i></span>
-        </div>
+      <el-col :xs="24" :sm="24" :md="{ span: 13, offset: 3 }">
+        <post-list></post-list>
       </el-col>
       <el-col :xs="24" :sm="24" :md="5">
         <home-tags :tags="tags"></home-tags>
@@ -30,30 +16,23 @@
 import PostItem from "@/components/post/Item.vue";
 import HomeTags from "@/components/post/HomeTags.vue";
 import HomeCategories from "@/components/post/HomeCategories.vue";
+import PostList from "@/components/post/PostList.vue";
 
 export default {
   name: "Home",
   components: {
-    PostItem,
     HomeTags,
-    HomeCategories
+    HomeCategories,
+    PostList
   },
   data() {
     return {
-      posts: [],
-      next: "",
-      previous: "",
       categories: [],
       tags: [],
       loading: false
     };
   },
   created() {
-    this.$api.blog.postList({ params: { page_size: 2 } }).then(res => {
-      this.posts = res.data.results;
-      this.next = res.data.next;
-      this.previous = res.data.previous;
-    });
     this.$api.blog.tagList({}).then(res => {
       this.tags = res.data.results;
     });
@@ -79,5 +58,4 @@ export default {
   computed: {}
 };
 </script>
-<style lang="stylus" scoped>
-</style>
+<style lang="stylus" scoped></style>

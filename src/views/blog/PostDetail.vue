@@ -1,5 +1,10 @@
 <template>
-  <div class="md" v-if="md" v-html="md"></div>
+  <div>
+    <el-card shadow="hover">
+      <div class="title">{{ post.title }}</div>
+      <div class="md" v-if="md" v-html="md"></div>
+    </el-card>
+  </div>
 </template>
 
 <script>

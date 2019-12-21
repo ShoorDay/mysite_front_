@@ -1,18 +1,18 @@
 import http from "@/utils/http";
 
-const baseURL = "api-user/";
+export const apiURL = "api-user/";
 
 export default {
   authenticate(data, config) {
-    return http.post(baseURL + "token/", data, config);
+    return http.post(apiURL + "token/", data, config);
   },
   signUp(data, config) {
-    return http.post(baseURL + "users/", data, config);
+    return http.post(apiURL + "users/", data, config);
   },
   tokenVerify(data, config) {
-    return http.post(baseURL + "token/verify/", data, config);
+    return http.post(apiURL + "token/verify/", data, config);
   },
   userRetrieve(id, config) {
-    return http.get(baseURL + "users/" + id + "/", config);
+    return http.get(apiURL + "users/" + id + "/", config);
   }
 };

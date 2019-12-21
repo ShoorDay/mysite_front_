@@ -10,7 +10,17 @@ export default [
     name: "blog",
     component: Home,
     meta: {
-      title: "博客"
+      title: "博客",
+      keepAlive: true
+    }
+  },
+  {
+    path: "/blog/:id/edit",
+    name: "post_update",
+    component: Editor,
+    meta: {
+      title: "编辑",
+      requireAuth: true
     }
   },
   {

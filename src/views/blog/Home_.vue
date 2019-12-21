@@ -7,7 +7,9 @@
         :ref="i.id"
         :key="i.id"
         style="height: 512px;"
-      >{{ i.title }}</li>
+      >
+        {{ i.title }}
+      </li>
     </ul>
     <el-button @click="load">加载</el-button>
   </div>
@@ -18,10 +20,7 @@ export default {
   name: "Home",
   data() {
     return {
-      loading: false,
-      posts: 5,
-      next: "",
-      previous: ""
+      loading: false
     };
   },
   methods: {
@@ -46,13 +45,6 @@ export default {
     disabled() {
       return this.loading || this.noMore;
     }
-  },
-  created() {
-    this.$api.blog.postList({ params: { page_size: 2 } }).then(res => {
-      this.posts = res.data.results;
-      this.next = res.data.next;
-      this.previous = res.data.previous;
-    });
   }
 };
 </script>

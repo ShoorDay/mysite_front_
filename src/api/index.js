@@ -1,11 +1,11 @@
-import http from "@/utils/http";
+import { http_ as http } from "@/utils/http";
 import blog from "./blog";
 import user from "./user";
-import image from "./image";
+import picture from "./picture";
 
 export default {
   http,
   blog,
   user,
-  image
+  picture
 };

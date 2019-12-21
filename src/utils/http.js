@@ -3,6 +3,9 @@ import { Notification } from "element-ui";
 import jwt from "@/utils/jwt.js";
 const config = require("@/config/config.js");
 
+axios.defaults.timeout = 1000 * 12;
+axios.defaults.validateStatus = status => status >= 200 && status < 300;
+
 const errorHandle = (status, data) => {
   const message = data.message || data.detail || data.msg || "错误";
   switch (status) {
@@ -36,9 +39,23 @@ const errorHandle = (status, data) => {
   }
 };
 
+axios.interceptors.response.use(
+  // 请求成功
+  res => (res.status === 200 ? Promise.resolve(res) : Promise.reject(res)),
+  // 请求失败
+  error => {
+    const { response } = error;
+    if (response) {
+      errorHandle(response.status, response.data);
+      return Promise.reject(response);
+    } else {
+      window.localStorage.setItem("network", false);
+    }
+  }
+);
+
 const instance = axios.create({
-  baseURL: config.url,
-  timeout: 1000 * 12
+  baseURL: config.url
 });
 
 instance.interceptors.request.use(
@@ -58,19 +75,8 @@ instance.interceptors.request.use(
   }
 );
 
-instance.interceptors.response.use(
-  // 请求成功
-  res => (res.status === 200 ? Promise.resolve(res) : Promise.reject(res)),
-  // 请求失败
-  error => {
-    const { response } = error;
-    if (response) {
-      errorHandle(response.status, response.data);
-      return Promise.reject(response);
-    } else {
-      window.localStorage.setItem("network", false);
-    }
-  }
-);
+export const http_ = axios.create({});
+export const axios_ = axios;
+export const url = config.url;
 
 export default instance;

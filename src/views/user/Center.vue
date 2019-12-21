@@ -1,19 +1,15 @@
 <template>
-  <div>
-      {{ profile }}
-  </div>
+  <div>{{ profile }}</div>
 </template>
 
 <script>
-import { mapState } from 'vuex'
+import { mapState } from "vuex";
 
 export default {
-    computed: {
-        ...mapState({profile: "user"})
-    }
-}
+  computed: {
+    ...mapState({ profile: "user" })
+  }
+};
 </script>
 
-<style>
-
-</style>
+<style></style>

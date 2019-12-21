@@ -2,7 +2,11 @@
   <el-row type="flex" justify="center">
     <el-col :xs="24" :md="16">
       <el-card>
-        <collection :title="tag.name" :posts="tag.posts" :num="tag.post_num"></collection>
+        <collection
+          :title="tag.name"
+          :posts="tag.posts"
+          :num="tag.post_num"
+        ></collection>
       </el-card>
     </el-col>
   </el-row>
@@ -28,5 +32,4 @@ export default {
 };
 </script>
 
-<style>
-</style>
+<style></style>

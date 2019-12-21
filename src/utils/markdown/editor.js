@@ -74,7 +74,7 @@ export const actions = {
     suffix: ")",
     placeholder: "连接"
   },
-  imagelink: {
+  imageLink: {
     prefix: "![](",
     suffix: ")",
     placeholder: "图片"

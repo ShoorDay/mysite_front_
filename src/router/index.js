@@ -48,8 +48,17 @@ router.beforeEach((to, from, next) => {
   const meta = to.matched[0].meta;
   document.title = meta.title;
   if (to.meta.requireAuth) {
-    if ($auth.check()) {
-      next();
+    const auth = $auth.check();
+    console.log(auth);
+
+    if (auth[0]) {
+      console.log(!to.meta.use_id);
+      if (
+        (to.meta.use_id && to.params[to.meta.use_id] == auth.use_id) ||
+        !to.meta.use_id
+      ) {
+        next();
+      }
     } else {
       next({
         name: "sign_in",

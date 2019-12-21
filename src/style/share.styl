@@ -1,0 +1,26 @@
+@import './config.styl';
+
+.router-tab-list {
+    border-bottom: 1px solid #f6f6f6;
+
+    .router-tab-item {
+        display: inline-block;
+        padding: 0 20px;
+
+        a {
+            font-size: 16px;
+            position: relative;
+            display: inline-block;
+            padding: 4px 0;
+            line-height: 22px;
+            color: $black;
+            text-align: center;
+        }
+
+        .router-link-exact-active {
+            font-weight: 600;
+            margin-bottom: -2px;
+            border-bottom: 2px solid #46bd87;
+        }
+    }
+}

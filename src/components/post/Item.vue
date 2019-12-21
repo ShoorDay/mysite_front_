@@ -1,11 +1,14 @@
 <template>
   <div class="post-item">
     <el-card shadow="hover">
-      <router-link v-if="image" :to="{name:'post_detail', params:{id: id}}">
+      <router-link
+        v-if="image"
+        :to="{ name: 'post_detail', params: { id: id } }"
+      >
         <img :src="image" />
       </router-link>
       <div>
-        <router-link :to="{name:'post_detail', params:{id: id}}">
+        <router-link :to="{ name: 'post_detail', params: { id: id } }">
           <div class="title">{{ title }}</div>
         </router-link>
         <div class="meta">
@@ -13,15 +16,23 @@
           <span
             class="time icon-calendar"
             :title="`创建于${created} | 修改于${updated}`"
-          >{{ created.slice(0, 10) }}</span>
-          <router-link :to="{name: 'category_detail', params: {id: category.id}}">
-            <span class="icon-folder" v-if="category.name">{{ category.name }}</span>
+            >{{ created.slice(0, 10) }}</span
+          >
+          <router-link
+            :to="{ name: 'category_detail', params: { id: category.id } }"
+            v-if="category"
+          >
+            <span class="icon-folder" v-if="category.name">{{
+              category.name
+            }}</span>
           </router-link>
         </div>
         <div class="excerpt" ref="md" v-html="excerpt"></div>
-        <div class="tags">
+        <div class="tags" v-if="tags">
           <span v-for="tag in tags" :key="tag.id">
-            <router-link :to="{name:'tag_detail', params:{id: tag.id}}">{{ tag.name }}</router-link>
+            <router-link :to="{ name: 'tag_detail', params: { id: tag.id } }">{{
+              tag.name
+            }}</router-link>
           </span>
         </div>
       </div>

@@ -1,7 +1,7 @@
 <template>
   <div class="editor">
     <slot name="header"></slot>
-      <tool-bar @insert="insertMd" @save="save" @shift="shift"></tool-bar>
+    <tool-bar @insert="insertMd" @save="save" @shift="shift" @upload_image="imageLink($event.url)"></tool-bar>
     <div class="preview" ref="preview" v-html="compiledMd" v-if="preview"></div>
     <div class="markdown" v-else>
       <textarea
@@ -25,6 +25,7 @@
 <script>
 import ToolBar from "./ToolsBar";
 import { actions } from "@/utils/markdown/editor.js";
+import { timingSafeEqual } from "crypto";
 
 export default {
   components: {
@@ -35,13 +36,18 @@ export default {
       type: String,
       default: "# Hello"
     },
+    auto_height: {
+      type: Boolean,
+      default: true
+    }
   },
   data() {
     return {
       title: "",
       md: "",
       compiledMd: "",
-      preview: false
+      preview: false,
+      rows: 8
     };
   },
   methods: {
@@ -106,11 +112,46 @@ export default {
       this.md = t.value;
       t.focus();
     },
+    imageLink(url) {
+      let action = actions["imageLink"];
+      var t = this.$refs.markdown;
+      t.focus();
+      let temp = t.value;
+      let startPos;
+      try {
+        startPos = t.selectionStart;
+      } catch (error) {
+        this.$notify.error({
+          title: "错误",
+          message: "浏览器不支持"
+        });
+        return;
+      }
+      t.value =
+        temp.substring(0, startPos) +
+        action.prefix +
+        url +
+        action.suffix +
+        temp.substring(startPos, temp.length);
+      t.selectionStart = startPos + 2;
+      t.selectionEnd = t.selectionStart;
+      this.md = t.value;
+      t.focus();
+    },
     save() {
       this.$emit("save");
+    },
+    autoHeight() {
+      this.$refs.markdown.style.height =
+        this.$refs.markdown.scrollHeight + "px";
     }
   },
   watch: {
+    md: function(val) {
+      if (this.auto_height) {
+        this.autoHeight();
+      }
+    },
     preview: function(val) {
       if (val) {
         this.compiledMd = this.$md.render(this.md);
@@ -124,6 +165,9 @@ export default {
   },
   created() {
     let this_ = this;
+    if (this.autoHeight) {
+      this.$nextTick(() => this.autoHeight());
+    }
     document.onkeyup = function(e) {
       if (e.key == "/" && e.ctrlKey == true) {
         this_.preview = !this_.preview;
