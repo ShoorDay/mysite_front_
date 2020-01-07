@@ -30,6 +30,7 @@ export default [
     },
     children: [
       { path: "post", name: "user_post", components: { main: PostList } }
+      // {path: "category", name: "user_cate", components: {main: }}
     ]
   }
 ];

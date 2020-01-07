@@ -1,18 +1,14 @@
 <template>
   <div class="about">
     <h1>This is an about page</h1>
-    <category-selector :owner="3"></category-selector>
+    <cate-edit></cate-edit>
   </div>
 </template>
 
 <script>
-import CategorySelector from "@/components/editor/CategorySelector";
 export default {
-  components: {
-    CategorySelector
-  }
+  name: "About"
 };
 </script>
 
-<style>
-</style>
+<style></style>

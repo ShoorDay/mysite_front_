@@ -22,21 +22,6 @@
         </editor>
       </el-col>
     </el-row>
-    <el-button type="text" @click="uploadVisible = true"
-      >点击打开 Dialog</el-button
-    >
-    <el-dialog title="提示" :visible.sync="uploadVisible" :fullscreen="true">
-      <span>这是一段信息</span>
-      <div>
-        <upload-image></upload-image>
-      </div>
-      <span slot="footer" class="dialog-footer">
-        <el-button @click="uploadVisible = false">取 消</el-button>
-        <el-button type="primary" @click="uploadVisible = false"
-          >确 定</el-button
-        >
-      </span>
-    </el-dialog>
   </div>
 </template>
 
@@ -45,15 +30,13 @@ import Editor from "@/components/editor/Body.vue";
 import MyTitle from "@/components/editor/Title.vue";
 import TagSelector from "@/components/editor/TagSelector.vue";
 import CategorySelector from "@/components/editor/CategorySelector.vue";
-import UploadImage from "@/components/editor/UploadImage.vue";
 
 export default {
   components: {
     Editor,
     MyTitle,
     TagSelector,
-    CategorySelector,
-    UploadImage
+    CategorySelector
   },
   data() {
     return {

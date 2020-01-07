@@ -3,8 +3,18 @@ const PostDetail = () => import("@/views/blog/PostDetail.vue");
 const Editor = () => import("@/views/blog/Editor.vue");
 const TagDetail = () => import("@/views/blog/TagDetail.vue");
 const CategoryDetail = () => import("@/views/blog/CategoryDetail.vue");
+const CategoryEdit = () => import("@/views/blog/CategoryEdit.vue");
 
 export default [
+  {
+    path: "/blog/cate_edit",
+    name: "cate_edit",
+    component: CategoryEdit,
+    meta: {
+      title: "编辑分类",
+      requireAuth: true
+    }
+  },
   {
     path: "/blog",
     name: "blog",
@@ -48,8 +58,8 @@ export default [
     }
   },
   {
-    path: "/editor",
-    name: "editor",
+    path: "/write",
+    name: "write",
     component: Editor,
     meta: {
       title: "编辑",

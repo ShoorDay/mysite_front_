@@ -26,7 +26,7 @@ export default {
         lazy: true,
         leaf: "is_leaf",
         lazyLoad(node, resolve) {
-        let params;
+          let params;
           if (node.level === 0) {
             params = { owner: this_.owner, is_root: true };
           } else {
@@ -44,5 +44,4 @@ export default {
 };
 </script>
 
-<style>
-</style>
+<style></style>

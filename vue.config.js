@@ -1,7 +1,13 @@
 module.exports = {
   configureWebpack: {
     externals: {
-      Prism: "window.Prism"
+      // jquery: "window.$",
+      Prism: "window.Prism",
+      vue: "Vue",
+      "vue-router": "VueRouter",
+      vuex: "Vuex",
+      axios: "axios",
+      "element-ui": "ELEMENT"
     }
   }
 };

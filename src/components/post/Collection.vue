@@ -4,7 +4,7 @@
     <div class="posts">
       <div class="post" v-for="post in posts" :key="post.id">
         <span class="time">{{ post.created.slice(0, 10) }}</span>
-        <router-link :to="{name: 'post_detail', params:{id: post.id}}">
+        <router-link :to="{ name: 'post_detail', params: { id: post.id } }">
           <span class="title">{{ post.title }}</span>
         </router-link>
         <span class="atuthor">{{ post.author }}</span>

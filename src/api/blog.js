@@ -32,5 +32,14 @@ export default {
   },
   categoryRetrieve(id, config) {
     return http.get(apiURL + "categories/" + id + "/", config);
+  },
+  categoryCreate(data, config) {
+    return http.post(apiURL + "categories/", data, config);
+  },
+  categoryDelete(id, config) {
+    return http.delete(apiURL + "categories/" + id + "/", config);
+  },
+  categoryUpdate(id, data, config) {
+    return http.patch(apiURL + "categories/" + id + "/", data, config);
   }
 };

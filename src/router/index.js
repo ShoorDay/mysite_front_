@@ -3,6 +3,7 @@ import VueRouter from "vue-router";
 import $auth from "@/utils/localAuth";
 
 import Home from "@/views/Home.vue";
+
 import blog from "./blog.js";
 import user from "./user.js";
 

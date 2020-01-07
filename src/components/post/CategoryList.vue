@@ -1,17 +1,11 @@
 <template>
-  <div class="categoty-list">
-      
-  </div>
+  <div class="categoty-list"></div>
 </template>
 
 <script>
 export default {
-    props: {
-        
-    }
-}
+  props: {}
+};
 </script>
 
-<style>
-
-</style>
+<style></style>
