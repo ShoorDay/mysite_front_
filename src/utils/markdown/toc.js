@@ -1,5 +1,4 @@
 const linkL = link => parseInt(link.parentElement.nodeName[1]);
-import $ from "jquery";
 
 function linkP(link) {
   let level = linkL(link);

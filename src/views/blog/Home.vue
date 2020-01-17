@@ -4,7 +4,32 @@
       <el-col :xs="24" :sm="24" :md="{ span: 13, offset: 3 }">
         <post-list></post-list>
       </el-col>
-      <el-col :xs="24" :sm="24" :md="5">
+      <el-col :xs="24" :sm="24" :md="6" :lg="5" style="position: sticky; top:0">
+        <el-card v-if="true">
+          <el-row type="flex" justify="space-between">
+            <el-col class="nav-icon">
+              <router-link :to="{ name: 'write' }">
+                <svg class="icon" aria-hidden="true">
+                  <use xlink:href="#icon-gangbi" />
+                </svg>
+                <div>写文章</div>
+              </router-link>
+            </el-col>
+            <el-col class="nav-icon">
+              <router-link
+                :to="{
+                  name: 'user',
+                  params: { id: $store.state.user.user_id }
+                }"
+              >
+                <svg class="icon" aria-hidden="true">
+                  <use xlink:href="#icon-wode" />
+                </svg>
+                <div>个人中心</div>
+              </router-link>
+            </el-col>
+          </el-row>
+        </el-card>
         <home-tags :tags="tags"></home-tags>
         <home-categories :categories="categories"></home-categories>
       </el-col>
@@ -58,4 +83,16 @@ export default {
   computed: {}
 };
 </script>
-<style lang="stylus" scoped></style>
+<style lang="stylus" scoped>
+.nav-icon {
+  text-align: center;
+
+  & a {
+    color: #222831;
+  }
+
+  & svg {
+    font-size: 35px;
+  }
+}
+</style>

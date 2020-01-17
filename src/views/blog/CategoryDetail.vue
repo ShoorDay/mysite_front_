@@ -1,7 +1,11 @@
 <template>
   <div>
     <el-card>
-      <collection :title="category.name" :posts="category.posts" :num="category.post_num"></collection>    
+      <collection
+        :title="category.name"
+        :posts="category.posts"
+        :num="category.post_num"
+      ></collection>
     </el-card>
   </div>
 </template>
@@ -26,5 +30,4 @@ export default {
 };
 </script>
 
-<style>
-</style>
+<style></style>

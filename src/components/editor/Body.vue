@@ -1,7 +1,12 @@
 <template>
   <div class="editor">
     <slot name="header"></slot>
-    <tool-bar @insert="insertMd" @save="save" @shift="shift" @upload_image="imageLink($event.url)"></tool-bar>
+    <tool-bar
+      @insert="insertMd"
+      @save="save"
+      @shift="shift"
+      @upload_image="imageLink($event.url)"
+    ></tool-bar>
     <div class="preview" ref="preview" v-html="compiledMd" v-if="preview"></div>
     <div class="markdown" v-else>
       <textarea
@@ -9,11 +14,11 @@
         ref="markdown"
         v-model="md"
         :placeholder="placeholder"
-        @keyup.ctrl.alt.c.native="insertMd('code')"
-        @keyup.ctrl.b.exact.native="insertMd('bold')"
-        @keyup.ctrl.i.exact.native="insertMd('italic')"
-        @keyup.ctrl.l.exact.native="insertMd('link')"
-        @keyup.ctrl.q.exact.native="insertMd('quote')"
+        @keyup.ctrl.alt.c.exact="insertMd('code')"
+        @keyup.ctrl.b.exact="insertMd('bold')"
+        @keyup.ctrl.i.exact="insertMd('italic')"
+        @keyup.ctrl.l.exact="insertMd('link')"
+        @keyup.ctrl.q.exact="insertMd('quote')"
       ></textarea>
     </div>
     <div class="bottom-tool-bar">

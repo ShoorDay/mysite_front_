@@ -84,7 +84,10 @@ export default {
       this.$api.blog.postRetrieve(this.$route.params.id, {}).then(res => {
         console.log(res);
         if (res.data.author_display.id != this.$store.state.user.user_id) {
-          this.$router.replace({ name: "sign_in" });
+          this.$router.replace({
+            name: "post_detail",
+            params: { id: this.$route.params.id }
+          });
         }
         this.$refs.title.title = res.data.title;
         this.form.is_public = res.data.is_public;

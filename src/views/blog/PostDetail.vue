@@ -1,20 +1,47 @@
 <template>
   <div>
-    <el-container>
-      <el-aside width="200px" v-if="false" v-html="toc"></el-aside>
-      <el-main>
-        <el-card shadow="hover">
-          <div class="title">{{ post.title }}</div>
-          <div class="md" v-if="md" v-html="md"></div>
-        </el-card>
-      </el-main>
-    </el-container>
+    <el-row :gutter="15">
+      <el-col :xs="24" :sm="24" :md="{ span: 13, offset: 3 }">
+        <card shadow="hover">
+          <header class="post-header">
+            <div class="title">{{ post.title }}</div>
+            <div class="meta">
+              <span class="time">
+                <svg class="icon" aria-hidden="true">
+                  <use xlink:href="#icon-rili" />
+                </svg>
+                {{ post.created }} </span
+              >|
+              <span
+                class="cate"
+                v-for="cate in post.category_display"
+                :key="cate.id"
+              >
+                <svg class="icon" aria-hidden="true">
+                  <use xlink:href="#icon-fenlei1" /></svg
+                >{{ cate.name }}/</span
+              >
+            </div>
+          </header>
+          <div class="body md" v-if="md" v-html="md"></div>
+          <footer class="post-footer">
+            <span class="prefix">上次编辑:</span>
+            <span class="time">{{ post.updated }}</span>
+          </footer>
+        </card>
+      </el-col>
+      <el-col :xs="24" :sm="24" :md="6" :lg="5">
+        <user-card></user-card>
+      </el-col>
+    </el-row>
   </div>
 </template>
 
 <script>
 import { toc as Toc } from "@/utils/markdown/toc.js";
+import UserCard from "@/components/user/Card.vue";
 export default {
+  components: { UserCard },
   name: "PostDetial",
   data() {
     return {
@@ -48,4 +75,6 @@ export default {
 };
 </script>
 
-<style></style>
+<style lang="stylus">
+@import '~@/style/post/detail.styl';
+</style>

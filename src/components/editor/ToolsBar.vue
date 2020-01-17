@@ -7,7 +7,10 @@
         content="粗体(ctrl+b)"
         placement="bottom-start"
       >
-        <button class="icon-bold" @click="clicks('bold')"></button>
+        <button
+          class="iconfont icon-zitijiacu"
+          @click="clicks('bold')"
+        ></button>
       </el-tooltip>
       <el-tooltip
         class="item"
@@ -15,7 +18,10 @@
         content="斜体(ctrl+i)"
         placement="bottom-start"
       >
-        <button class="icon-italic" @click="clicks('italic')"></button>
+        <button
+          class="iconfont icon-zitixieti"
+          @click="clicks('italic')"
+        ></button>
       </el-tooltip>
       <el-tooltip
         class="item"
@@ -24,7 +30,7 @@
         placement="bottom-start"
       >
         <button
-          class="icon-superscript"
+          class="iconfont icon-zitishangbiao"
           @click="clicks('superscript')"
         ></button>
       </el-tooltip>
@@ -34,7 +40,10 @@
         content="下标"
         placement="bottom-start"
       >
-        <button class="icon-subscript" @click="clicks('subscript')"></button>
+        <button
+          class="iconfont icon-zitixiabiao"
+          @click="clicks('subscript')"
+        ></button>
       </el-tooltip>
       <el-tooltip
         class="item"
@@ -42,7 +51,10 @@
         content="代码(ctrl+shift+`)"
         placement="bottom-start"
       >
-        <button class="icon-code" @click="clicks('code')"></button>
+        <button
+          class="iconfont icon-zitidaima"
+          @click="clicks('code')"
+        ></button>
       </el-tooltip>
       <el-tooltip
         class="item"
@@ -50,7 +62,7 @@
         content="引用(ctrl+q)"
         placement="bottom-start"
       >
-        <button class="icon-quote" @click="clicks('quote')"></button>
+        <button class="iconfont icon-yinyong" @click="clicks('quote')"></button>
       </el-tooltip>
       <el-tooltip
         class="item"
@@ -58,7 +70,10 @@
         content="链接(ctrl+l)"
         placement="bottom-start"
       >
-        <button class="icon-link" @click="clicks('link')"></button>
+        <button
+          class="iconfont icon-charulianjie"
+          @click="clicks('link')"
+        ></button>
       </el-tooltip>
       <el-tooltip
         class="item"
@@ -66,7 +81,10 @@
         content="图片链接(ctrl+l)"
         placement="bottom-start"
       >
-        <button class="icon-image" @click="clicks('imageLink')"></button>
+        <button
+          class="iconfont icon-tupian"
+          @click="clicks('imageLink')"
+        ></button>
       </el-tooltip>
       <el-tooltip
         class="item"
@@ -75,7 +93,7 @@
         placement="bottom-start"
       >
         <button
-          class="icon-upload-image"
+          class="iconfont icon-ic_image_upload"
           @click="uploadVisible = true"
         ></button> </el-tooltip
       >|
@@ -86,7 +104,7 @@
           content="了解Markdown"
           placement="bottom-start"
         >
-          <button class="icon-markdown"></button>
+          <button class="iconfont icon-logo-markdown"></button>
         </el-tooltip>
       </a>
       <el-tooltip
@@ -95,7 +113,10 @@
         content="预览(ctrl+/)"
         placement="bottom-start"
       >
-        <button class="icon-eye" @click="$emit('shift')"></button>
+        <button
+          class="iconfont icon-zitiyulan"
+          @click="$emit('shift')"
+        ></button>
       </el-tooltip>
       <el-tooltip
         class="item"
@@ -103,7 +124,7 @@
         content="保存(ctrl+s)"
         placement="bottom-start"
       >
-        <button class="icon-save" @click="$emit('save')"></button>
+        <button class="iconfont icon-baocun" @click="$emit('save')"></button>
       </el-tooltip>
     </div>
     <div>

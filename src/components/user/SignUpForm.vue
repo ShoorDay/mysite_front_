@@ -1,7 +1,17 @@
 <template>
-  <el-form ref="form" :model="form" :rules="rules" label-position="right" label-width="auto">
+  <el-form
+    ref="form"
+    :model="form"
+    :rules="rules"
+    label-position="right"
+    label-width="auto"
+  >
     <el-form-item prop="username" label="用户名">
-      <el-input v-model="form.username" placeholder="用户名" prefix-icon="el-icon-user"></el-input>
+      <el-input
+        v-model="form.username"
+        placeholder="用户名"
+        prefix-icon="el-icon-user"
+      ></el-input>
     </el-form-item>
     <el-form-item prop="email" label="邮箱">
       <el-input placeholder="邮箱" v-model="form.email" clearable></el-input>
@@ -54,8 +64,8 @@ export default {
         },
         err => {
           console.log(err);
-          if(err.status == 201)
-          this_.$store.commit("user/authenticate", err.data);
+          if (err.status == 201)
+            this_.$store.commit("user/authenticate", err.data);
         }
       );
     }
@@ -63,5 +73,4 @@ export default {
 };
 </script>
 
-<style>
-</style>
+<style></style>

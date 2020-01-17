@@ -1,13 +1,7 @@
 <template>
   <div>
-    <div id="nav">
-      <el-row>
-        <el-col :span="24">
-          <nav-bar></nav-bar>
-        </el-col>
-      </el-row>
-    </div>
-    <div class="main">
+    <nav-bar></nav-bar>
+    <div id="main" style="margin: 10px auto;">
       <router-view />
     </div>
     <my-footer></my-footer>

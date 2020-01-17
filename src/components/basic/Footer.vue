@@ -1,9 +1,20 @@
 <template>
   <footer id="footer">
     <div>
-      <div>benlai</div>
-      <div style="margin: 5px 0px;">
-        ~~~~
+      <div style="display: flex; flex-direction: column; align-items: center;">
+        <div style="margin: 15px auto;">Shoor's Site</div>
+        <div style="margin: 5px 0px;">
+          Shoor's Site ©2019 Created by Shoor
+        </div>
+        <div style="margin: 5px 0px;">
+          陕ICP备 19025064 号
+        </div>
+        <div style="margin: 5px 0px;">
+          若本站收录内容无意侵犯了贵公司版权，请给网页底部邮箱地址来信，我会及时处理和回复，谢谢合作
+        </div>
+        <div style="margin: 5px 0px;">
+          站长邮箱 : shoorday@outlook.com
+        </div>
       </div>
     </div>
   </footer>
