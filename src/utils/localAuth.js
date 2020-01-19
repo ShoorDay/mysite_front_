@@ -39,8 +39,7 @@ export default {
         this.delete();
         $vm.$notify.error({
           title: "登录过期",
-          message: "请重新登录",
-          duration: 0
+          message: "请重新登录"
         });
         $vm.$router.push({
           name: "sign_in"

@@ -1,8 +1,8 @@
 <template>
-  <div class="posts-collection">
-    <div class="title">{{ title }}</div>
-    <div class="posts">
-      <div class="post" v-for="post in posts" :key="post.id">
+  <div class="collection">
+    <div class="collection-title">{{ title }}</div>
+    <div class="collection-items">
+      <div class="collection-item" v-for="post in posts" :key="post.id">
         <span class="time">{{ post.created.slice(0, 10) }}</span>
         <router-link :to="{ name: 'post_detail', params: { id: post.id } }">
           <span class="title">{{ post.title }}</span>

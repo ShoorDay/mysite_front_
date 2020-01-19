@@ -2,9 +2,9 @@
   <div id="sign" style="margin-top: 25px">
     <el-row type="flex" justify="center">
       <el-col :xs="23" :sm="10" :md="8" :lg="6" :xl="6">
-        <el-card>
+        <card>
           <sign-up-form></sign-up-form>
-        </el-card>
+        </card>
       </el-col>
     </el-row>
   </div>
@@ -18,5 +18,4 @@ export default {
 };
 </script>
 
-<style lang="stylus" scoped>
-</style>
+<style lang="stylus" scoped></style>

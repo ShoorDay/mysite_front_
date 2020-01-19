@@ -5,7 +5,7 @@
         <post-list></post-list>
       </el-col>
       <el-col :xs="24" :sm="24" :md="6" :lg="5" style="position: sticky; top:0">
-        <el-card v-if="true">
+        <card v-if="true">
           <el-row type="flex" justify="space-between">
             <el-col class="nav-icon">
               <router-link :to="{ name: 'write' }">
@@ -29,7 +29,7 @@
               </router-link>
             </el-col>
           </el-row>
-        </el-card>
+        </card>
         <home-tags :tags="tags"></home-tags>
         <home-categories :categories="categories"></home-categories>
       </el-col>

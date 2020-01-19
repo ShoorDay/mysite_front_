@@ -1,13 +1,13 @@
 <template>
   <el-row type="flex" justify="center">
     <el-col :xs="24" :md="16">
-      <el-card>
+      <card>
         <collection
           :title="tag.name"
           :posts="tag.posts"
           :num="tag.post_num"
         ></collection>
-      </el-card>
+      </card>
     </el-col>
   </el-row>
 </template>
