@@ -51,7 +51,7 @@ export default [
   },
   {
     path: "/category/:id",
-    name: "category_detail",
+    name: "cate_detail",
     component: CategoryDetail,
     meta: {
       title: "分类"

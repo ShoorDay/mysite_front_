@@ -9,7 +9,12 @@
     clearable
     @change="change"
   >
-    <el-option v-for="tag in tags" :key="tag.id" :label="tag.name" :value="tag.id"></el-option>
+    <el-option
+      v-for="tag in tags"
+      :key="tag.id"
+      :label="tag.name"
+      :value="tag.id"
+    ></el-option>
   </el-select>
 </template>
 
@@ -66,5 +71,4 @@ export default {
 };
 </script>
 
-<style>
-</style>
+<style></style>

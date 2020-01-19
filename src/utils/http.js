@@ -1,10 +1,16 @@
 import axios from "axios";
+import qs from "qs";
 import { Notification } from "element-ui";
 import jwt from "@/utils/jwt.js";
 const config = require("@/config/config.js");
 
 axios.defaults.timeout = 1000 * 12;
 axios.defaults.validateStatus = status => status >= 200 && status < 300;
+axios.defaults.paramsSerializer = function(params) {
+  return qs.stringify(params, {
+    arrayFormat: "repeat"
+  });
+};
 
 const errorHandle = (status, data) => {
   const message = data.message || data.detail || data.msg || "错误";

@@ -10,7 +10,7 @@
         <router-link
           v-for="category in categories"
           :key="category.id"
-          :to="{ name: 'category_detail', params: { id: category.id } }"
+          :to="{ name: 'cate_detail', params: { id: category.id } }"
           class="tag"
           >{{ category.name }}</router-link
         >

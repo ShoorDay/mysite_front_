@@ -30,6 +30,9 @@ export default {
   categoryList(config) {
     return http.get(apiURL + "categories/", config);
   },
+  categoryDisplay(id, config) {
+    return http.get(apiURL + "categories/" + id + "/display/", config);
+  },
   categoryRetrieve(id, config) {
     return http.get(apiURL + "categories/" + id + "/", config);
   },

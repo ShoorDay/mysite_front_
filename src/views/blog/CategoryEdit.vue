@@ -9,7 +9,7 @@
 </template>
 
 <script>
-import CateEdit from "@/components/post/CateEdit.vue";
+import CateEdit from "@/components/editor/CateEdit.vue";
 export default {
   components: { CateEdit }
 };

@@ -1,7 +1,6 @@
 <template>
   <div>
     <div class="block">
-      <p>使用 render-content</p>
       <el-tree
         :props="props"
         lazy

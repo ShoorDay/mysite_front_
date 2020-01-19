@@ -23,7 +23,7 @@
                 >{{ created.slice(0, 10) }}</span
               >
               <router-link
-                :to="{ name: 'category_detail', params: { id: category.id } }"
+                :to="{ name: 'cate_detail', params: { id: category.id } }"
                 v-if="category"
               >
                 <span class="iconfont icon-wenjian" v-if="category.name">{{
