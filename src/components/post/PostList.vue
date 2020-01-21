@@ -10,12 +10,11 @@
       :updated="post.updated"
       :author="post.author_display"
       :tags="post.tags_display"
-      :category="post.category_display[0] || null"
+      :category="post.category_display"
     ></post-item>
     <div class="load">
       <span v-if="loading">
-        <i class="el-icon-loading"></i> 加载中
-        <i class="el-icon-more"></i>
+        <loading-icon></loading-icon>
       </span>
       <span v-else-if="next && !loading" @click="load">
         点击加载更多

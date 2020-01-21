@@ -6,6 +6,9 @@ export default {
   postList(config) {
     return http.get(apiURL + "posts/", config);
   },
+  postSimilar(id, config) {
+    return http.get(apiURL + "posts/" + id + "/similar/", config);
+  },
   postRetrieve(id, config) {
     return http.get(apiURL + "posts/" + id + "/", config);
   },

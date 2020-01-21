@@ -10,17 +10,22 @@
                 <svg class="icon" aria-hidden="true">
                   <use xlink:href="#icon-rili" />
                 </svg>
-                {{ post.created }} </span
-              >|
-              <span
+                {{ post.created }}
+              </span>
+              <router-link
+                v-if="post.category_display"
                 class="cate"
-                v-for="cate in post.category_display"
-                :key="cate.id"
+                :to="{
+                  name: 'cate_detail',
+                  params: { id: post.category_display.id }
+                }"
               >
+                |
                 <svg class="icon" aria-hidden="true">
-                  <use xlink:href="#icon-fenlei1" /></svg
-                >{{ cate.name }}/</span
-              >
+                  <use xlink:href="#icon-fenlei1" />
+                </svg>
+                {{ post.category_display.name }}
+              </router-link>
             </div>
           </header>
           <div class="body md" v-if="md" v-html="md"></div>
@@ -32,6 +37,11 @@
       </el-col>
       <el-col :xs="24" :sm="24" :md="6" :lg="5">
         <user-card></user-card>
+        <card v-if="similar">
+          <route-link v-for="post in similar" :key="post.id">
+            {{ post.title }}
+          </route-link>
+        </card>
       </el-col>
     </el-row>
   </div>
@@ -40,6 +50,8 @@
 <script>
 import { toc as Toc } from "@/utils/markdown/toc.js";
 import UserCard from "@/components/user/Card.vue";
+const CONFIG = require("@/config/config.js");
+
 export default {
   components: { UserCard },
   name: "PostDetial",
@@ -47,7 +59,9 @@ export default {
     return {
       post: {},
       md: "",
-      toc: "r"
+      toc: "",
+      similar: [],
+      BACK_URL: CONFIG.back_url
     };
   },
   created() {
@@ -64,6 +78,11 @@ export default {
     md: function(val) {
       this.$nextTick(() => {
         this.toc = Toc(document.getElementsByClassName("header-anchor"));
+      });
+    },
+    post: function(new_post, old_post) {
+      this.$api.blog.postSimilar(new_post.id).then(res => {
+        this.similar = res.data;
       });
     }
   },

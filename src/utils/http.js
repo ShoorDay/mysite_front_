@@ -61,7 +61,7 @@ axios.interceptors.response.use(
 );
 
 const instance = axios.create({
-  baseURL: config.url
+  baseURL: config.back_url
 });
 
 instance.interceptors.request.use(
@@ -83,6 +83,6 @@ instance.interceptors.request.use(
 
 export const http_ = axios.create({});
 export const axios_ = axios;
-export const url = config.url;
+export const url = config.back_url;
 
 export default instance;

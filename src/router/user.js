@@ -2,7 +2,9 @@ const SignIn = () => import("@/views/user/SignIn.vue");
 const SignUp = () => import("@/views/user/SignUp.vue");
 const Center = () => import("@/views/user/Center.vue");
 const User = () => import("@/views/user/User.vue");
-const PostList = () => import("@/components/post/PostList.vue");
+const PostList = () => import("@/views/user/PostList.vue");
+const Categories = () => import("@/views/user/Categories.vue");
+const Tags = () => import("@/views/user/Tags.vue");
 
 export default [
   {
@@ -29,8 +31,27 @@ export default [
       title: "个人中心"
     },
     children: [
-      { path: "post", name: "user_post", components: { main: PostList } }
-      // {path: "category", name: "user_cate", components: {main: }}
+      {
+        path: "posts",
+        name: "user_posts",
+        components: {
+          main: PostList
+        }
+      },
+      {
+        path: "categories",
+        name: "user_categories",
+        components: {
+          main: Categories
+        }
+      },
+      {
+        path: "tags",
+        name: "user_tags",
+        components: {
+          main: Tags
+        }
+      }
     ]
   }
 ];

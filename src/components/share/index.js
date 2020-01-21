@@ -1,6 +1,7 @@
 import Card from "./Card.vue";
+import LoadingIcon from "./LoadingIcon.vue";
 
-const components = [Card];
+const components = [Card, LoadingIcon];
 
 export default {
   install(Vue) {

@@ -29,6 +29,13 @@
               </router-link>
             </el-col>
           </el-row>
+          <div class="links" style="margin:1rem 0 0">
+            <a :href="URL + 'rss/blog/'" rel="alternate">
+              <svg class="icon" aria-hidden="true">
+                <use xlink:href="#icon-rss" />
+              </svg>
+            </a>
+          </div>
         </card>
         <home-tags :tags="tags"></home-tags>
         <home-categories :categories="categories"></home-categories>
@@ -42,6 +49,7 @@ import PostItem from "@/components/post/Item.vue";
 import HomeTags from "@/components/post/HomeTags.vue";
 import HomeCategories from "@/components/post/HomeCategories.vue";
 import PostList from "@/components/post/PostList.vue";
+const CONFIG = require("@/config/config.js");
 
 export default {
   name: "Home",
@@ -54,7 +62,8 @@ export default {
     return {
       categories: [],
       tags: [],
-      loading: false
+      loading: false,
+      URL: CONFIG.back_url
     };
   },
   created() {
