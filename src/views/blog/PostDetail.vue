@@ -36,11 +36,14 @@
         </card>
       </el-col>
       <el-col :xs="24" :sm="24" :md="6" :lg="5">
-        <user-card></user-card>
+        <user-card :id="post.author"></user-card>
         <card v-if="similar">
-          <route-link v-for="post in similar" :key="post.id">
-            {{ post.title }}
-          </route-link>
+          <router-link
+            v-for="post in similar"
+            :key="post.id"
+            :to="{ name: 'post_detail', params: { id: post.id } }"
+            >{{ post.title }}</router-link
+          >
         </card>
       </el-col>
     </el-row>
@@ -61,25 +64,31 @@ export default {
       md: "",
       toc: "",
       similar: [],
-      BACK_URL: CONFIG.back_url
+      author: ""
     };
   },
+  methods: {
+    setData(id) {
+      this.$api.blog.postRetrieve(id).then(res => {
+        this.post = res.data;
+        this.author = res.data.author;
+        this.md = this.$md.render(this.post.content);
+      });
+    }
+  },
   created() {
-    this.$api.blog.postRetrieve(this.$route.params.id, {}).then(res => {
-      this.post = res.data;
-      this.md = this.$md.render(this.post.content);
-    });
+    this.setData(this.$route.params.id);
   },
   updated() {
     this.Prism.highlightAll();
     // toc(document.getElementsByClassName("el-aside")[0], document);
   },
   watch: {
-    md: function(val) {
-      this.$nextTick(() => {
-        this.toc = Toc(document.getElementsByClassName("header-anchor"));
-      });
-    },
+    // md: function(val) {
+    //   this.$nextTick(() => {
+    //     this.toc = Toc(document.getElementsByClassName("header-anchor"));
+    //   });
+    // },
     post: function(new_post, old_post) {
       this.$api.blog.postSimilar(new_post.id).then(res => {
         this.similar = res.data;
@@ -90,6 +99,13 @@ export default {
     showToc() {
       return /<a class="header-anchor" /.test(this.md);
     }
+  },
+  beforeRouteUpdate(to, from, next) {
+    console.log(to, from);
+    if (to.name == from.name && to.params.id != from.params.id) {
+      this.setData(to.params.id);
+    }
+    next();
   }
 };
 </script>

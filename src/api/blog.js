@@ -6,17 +6,17 @@ export default {
   postList(config) {
     return http.get(apiURL + "posts/", config);
   },
-  postSimilar(id, config) {
-    return http.get(apiURL + "posts/" + id + "/similar/", config);
+  postSimilar(pk, config) {
+    return http.get(apiURL + "posts/" + pk + "/similar/", config);
   },
-  postRetrieve(id, config) {
-    return http.get(apiURL + "posts/" + id + "/", config);
+  postRetrieve(pk, config) {
+    return http.get(apiURL + "posts/" + pk + "/", config);
   },
   postCreate(data, config) {
     return http.post(apiURL + "posts/", data, config);
   },
-  postUpdate(id, data, config) {
-    return http.patch(apiURL + "posts/" + id + "/", data, config);
+  postUpdate(pk, data, config) {
+    return http.patch(apiURL + "posts/" + pk + "/", data, config);
   },
   tagList(config) {
     return http.get(apiURL + "tags/", config);
@@ -27,25 +27,25 @@ export default {
   tagExistsOrCreate(data, config) {
     return http.post(apiURL + "tags/exists/", data, config);
   },
-  tagRetrieve(id, config) {
-    return http.get(apiURL + "tags/" + id + "/", config);
+  tagRetrieve(pk, config) {
+    return http.get(apiURL + "tags/" + pk + "/", config);
   },
   categoryList(config) {
     return http.get(apiURL + "categories/", config);
   },
-  categoryDisplay(id, config) {
-    return http.get(apiURL + "categories/" + id + "/display/", config);
+  categoryDisplay(pk, config) {
+    return http.get(apiURL + "categories/" + pk + "/display/", config);
   },
-  categoryRetrieve(id, config) {
-    return http.get(apiURL + "categories/" + id + "/", config);
+  categoryRetrieve(pk, config) {
+    return http.get(apiURL + "categories/" + pk + "/", config);
   },
   categoryCreate(data, config) {
     return http.post(apiURL + "categories/", data, config);
   },
-  categoryDelete(id, config) {
-    return http.delete(apiURL + "categories/" + id + "/", config);
+  categoryDelete(pk, config) {
+    return http.delete(apiURL + "categories/" + pk + "/", config);
   },
-  categoryUpdate(id, data, config) {
-    return http.patch(apiURL + "categories/" + id + "/", data, config);
+  categoryUpdate(pk, data, config) {
+    return http.patch(apiURL + "categories/" + pk + "/", data, config);
   }
 };

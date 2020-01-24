@@ -12,7 +12,7 @@ export default {
   tokenVerify(data, config) {
     return http.post(apiURL + "token/verify/", data, config);
   },
-  userRetrieve(id, config) {
-    return http.get(apiURL + "users/" + id + "/", config);
+  userRetrieve(pk, config) {
+    return http.get(apiURL + "users/" + pk + "/", config);
   }
 };

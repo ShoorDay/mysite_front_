@@ -7,7 +7,7 @@
       </div>
       <div class="profile">
         <div class="username" style="font-weight:bold">
-          <span>{{ nickname || username }}</span>
+          <span>{{ name }}</span>
         </div>
         <div class="sign">{{ sign }}</div>
       </div>
@@ -29,25 +29,44 @@ export default {
   props: {
     id: {
       default: 3
-    },
-    username: {
-      default: "sure"
-    },
-    nickname: {
-      default: ""
-    },
-    avatar: {
-      default:
-        "https://cube.elemecdn.com/9/c2/f0ee8a3c7c9638a54940382568c9dpng.png"
-    },
-    sign: {
-      default: "Just go go!!!"
     }
   },
   data() {
     return {
-      BACK_URL: CONFIG.back_url
+      BACK_URL: CONFIG.back_url,
+      username: "",
+      nickname: "",
+      avatar:
+        "https://cube.elemecdn.com/9/c2/f0ee8a3c7c9638a54940382568c9dpng.png",
+      sign: "Just go go!!!"
     };
+  },
+  methods: {
+    setData(id) {
+      this.$api.user.userRetrieve(id).then(res => {
+        this.username = res.data.username;
+        this.nickname = res.data.nickname;
+        this.avatar = res.data.avatar || this.avatar;
+        this.sign = res.data.sign || this.sign;
+      });
+    }
+  },
+  created() {
+    this.setData(this.id);
+  },
+  watch: {
+    id: function(new_id, old_id) {
+      console.log(new_id, old_id, "变了");
+
+      if (new_id != old_id) {
+        this.setData(new_id);
+      }
+    }
+  },
+  computed: {
+    name() {
+      return this.nickname || this.username;
+    }
   }
 };
 </script>

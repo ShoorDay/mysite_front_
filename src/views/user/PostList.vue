@@ -29,7 +29,7 @@ export default {
   },
   created() {
     this.$api.blog
-      .postList({ params: { atuhor: this.$route.params.id } })
+      .postList({ params: { author: this.$route.params.id } })
       .then(res => {
         this.posts = res.data.results;
       });

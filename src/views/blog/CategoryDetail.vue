@@ -40,7 +40,6 @@ export default {
     }
   },
   beforeRouteUpdate(to, from, next) {
-    console.log(to, from);
     if (to.name == from.name && to != from) {
       this.setData(to.params.id);
     }
