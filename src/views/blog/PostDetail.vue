@@ -34,9 +34,19 @@
             <span class="time">{{ post.updated }}</span>
           </footer>
         </card>
+        <card>
+          <card shadow="never" v-for="c in comments" :key="c.id">
+            <comment-item
+              :owner="c.owner_detail"
+              :content="c.content"
+              :likes="c.vote_count"
+              :child_comment_count="c.child_comment_count"
+            ></comment-item>
+          </card>
+        </card>
       </el-col>
       <el-col :xs="24" :sm="24" :md="6" :lg="5">
-        <user-card :id="post.author"></user-card>
+        <user-card :id="author"></user-card>
         <card v-if="similar">
           <router-link
             v-for="post in similar"
@@ -54,9 +64,10 @@
 import { toc as Toc } from "@/utils/markdown/toc.js";
 import UserCard from "@/components/user/Card.vue";
 const CONFIG = require("@/config/config.js");
+import CommentItem from "@/components/comment/Item.vue";
 
 export default {
-  components: { UserCard },
+  components: { UserCard, CommentItem },
   name: "PostDetial",
   data() {
     return {
@@ -64,16 +75,24 @@ export default {
       md: "",
       toc: "",
       similar: [],
-      author: ""
+      author: "",
+      comments: []
     };
   },
   methods: {
     setData(id) {
+      let this_ = this;
       this.$api.blog.postRetrieve(id).then(res => {
         this.post = res.data;
         this.author = res.data.author;
         this.md = this.$md.render(this.post.content);
       });
+      this.$api.comment
+        .postCommentList({ params: { object_id: id } })
+        .then(res => {
+          console.log(res.data.results);
+          this.comments = res.data.results;
+        });
     }
   },
   created() {

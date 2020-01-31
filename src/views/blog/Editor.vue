@@ -93,9 +93,11 @@ export default {
         this.form.is_public = res.data.is_public;
         this.form.allow_comments = res.data.allow_comments;
         this.$refs.tags.selected = res.data.tags_display.map(tag => tag.id);
-        this.$refs.category.selected = res.data.category_display.map(
-          cate => cate.id
-        );
+        console.log(res.data);
+        this.$refs.category.selected = [res.data.category_display.id];
+        // this.$refs.category.selected = res.data.category_display.map(
+        //   cate => cate.id
+        // );
         this.$refs.body.md = res.data.content;
         console.log(this.$store.state.user);
       });

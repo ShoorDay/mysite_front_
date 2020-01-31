@@ -28,7 +28,7 @@ const CONFIG = require("@/config/config.js");
 export default {
   props: {
     id: {
-      default: 3
+      required: true
     }
   },
   data() {
@@ -51,14 +51,11 @@ export default {
       });
     }
   },
-  created() {
-    this.setData(this.id);
-  },
   watch: {
     id: function(new_id, old_id) {
       console.log(new_id, old_id, "变了");
 
-      if (new_id != old_id) {
+      if (new_id && new_id != old_id) {
         this.setData(new_id);
       }
     }
