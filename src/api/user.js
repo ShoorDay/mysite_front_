@@ -1,6 +1,23 @@
 import http from "@/utils/http";
+const config = require("@/config/config.js");
 
 export const apiURL = "api-user/";
+export const tp_types = {
+  gh: {
+    url: "github"
+  }
+};
+
+export function getTpAuthUrl(type, now) {
+  return (
+    config.back_url +
+    apiURL +
+    "auth/" +
+    tp_types[type].url +
+    `/?callback=${config.front_url}third_party_auth/` +
+    `&state=${type + "." + now + ".0"}`
+  );
+}
 
 export default {
   authenticate(data, config) {
@@ -14,5 +31,14 @@ export default {
   },
   userRetrieve(pk, config) {
     return http.get(apiURL + "users/" + pk + "/", config);
+  },
+  tpAuth(code, state) {
+    const type = state.split(".")[0];
+    return http.get(`${apiURL}auth/${tp_types[type].url}_callback/`, {
+      params: {
+        code,
+        state
+      }
+    });
   }
 };

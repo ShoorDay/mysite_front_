@@ -46,7 +46,7 @@
         </card>
       </el-col>
       <el-col :xs="24" :sm="24" :md="6" :lg="5">
-        <user-card :id="author"></user-card>
+        <user-card :id="author_id"></user-card>
         <card v-if="similar">
           <router-link
             v-for="post in similar"
@@ -75,7 +75,7 @@ export default {
       md: "",
       toc: "",
       similar: [],
-      author: "",
+      author_id: "",
       comments: []
     };
   },
@@ -84,7 +84,7 @@ export default {
       let this_ = this;
       this.$api.blog.postRetrieve(id).then(res => {
         this.post = res.data;
-        this.author = res.data.author;
+        this.author_id = res.data.author_id;
         this.md = this.$md.render(this.post.content);
       });
       this.$api.comment

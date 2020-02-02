@@ -5,8 +5,22 @@ const User = () => import("@/views/user/User.vue");
 const PostList = () => import("@/views/user/PostList.vue");
 const Categories = () => import("@/views/user/Categories.vue");
 const Tags = () => import("@/views/user/Tags.vue");
+const ThirdPartyAuth = () => import("@/views/user/ThirdPartyAuth.vue");
 
 export default [
+  {
+    path: "/third_party_auth",
+    name: "third_party_auth",
+    component: ThirdPartyAuth,
+    beforeEnter(to, from, next) {
+      if (to.query.code && to.query.state) {
+        next();
+      } else
+        next({
+          name: "sign_in"
+        });
+    }
+  },
   {
     path: "/sign_in",
     name: "sign_in",
