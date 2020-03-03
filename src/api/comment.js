@@ -14,5 +14,17 @@ export default {
   },
   postCommentUpdate(pk, data, config) {
     return http.patch(apiURL + "post_root_comments/" + pk + "/", data, config);
+  },
+  postRootCommentChildren(pk, config) {
+    return http.get(
+      apiURL + "post_root_comments/" + pk + "/child_comments/",
+      config
+    );
+  },
+  postChildCommentList(config) {
+    return http.get(apiURL + "post_child_comments/", config);
+  },
+  postChildCommentRetrieve(pk, config) {
+    return http.get(apiURL + "post_child_comments/" + pk + "/", config);
   }
 };

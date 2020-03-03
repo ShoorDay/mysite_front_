@@ -33,6 +33,6 @@
     "prettier": "^1.18.2",
     "stylus": "^0.54.7",
     "stylus-loader": "^3.0.2",
-    "vue-template-compiler": "^2.6.10"
+    "vue-template-compiler": "^2.6.11"
   }
 }

@@ -35,14 +35,11 @@
           </footer>
         </card>
         <card>
-          <card shadow="never" v-for="c in comments" :key="c.id">
-            <comment-item
-              :owner="c.owner_detail"
-              :content="c.content"
-              :likes="c.vote_count"
-              :child_comment_count="c.child_comment_count"
-            ></comment-item>
-          </card>
+          <comment-list
+            :root_comments="comments"
+            :next="c_next"
+            :previous="c_previous"
+          ></comment-list>
         </card>
       </el-col>
       <el-col :xs="24" :sm="24" :md="6" :lg="5">
@@ -64,10 +61,10 @@
 import { toc as Toc } from "@/utils/markdown/toc.js";
 import UserCard from "@/components/user/Card.vue";
 const CONFIG = require("@/config/config.js");
-import CommentItem from "@/components/comment/Item.vue";
+import CommentList from "@/components/comment/List.vue";
 
 export default {
-  components: { UserCard, CommentItem },
+  components: { UserCard, CommentList },
   name: "PostDetial",
   data() {
     return {
@@ -76,7 +73,9 @@ export default {
       toc: "",
       similar: [],
       author_id: "",
-      comments: []
+      comments: [],
+      c_next: null,
+      c_previous: null
     };
   },
   methods: {
@@ -92,6 +91,8 @@ export default {
         .then(res => {
           console.log(res.data.results);
           this.comments = res.data.results;
+          this.c_next = res.data.next;
+          this.c_previous = res.data.previous;
         });
     }
   },

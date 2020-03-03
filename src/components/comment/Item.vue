@@ -17,8 +17,28 @@
     </div>
     <div class="comment-content">{{ content }}</div>
     <div class="comment-footer">
-      <i class="iconfont icon-like-fill">{{ likes }}</i>
-      <span v-if="child_comment_count">查看回复</span>
+      <i
+        class="btn vote-btn iconfont icon-like-fill"
+        :class="{ 'is-active': voted }"
+        @click.once="like"
+        >{{ vote_count }}</i
+      >
+      <span v-if="child_comment_count" @click="$emit('view_replies', id)"
+        >查看回复</span
+      >
+      <i class="btn iconfont icon-reply hover-btn" @click="show_editor = true"
+        >回复</i
+      >
+    </div>
+    <div>
+      <el-input
+        autosize
+        :placeholder="placeholder"
+        v-model="reply_content"
+        v-if="show_editor"
+      >
+        <i class="iconfont icon-send" slot="append"></i>
+      </el-input>
     </div>
   </div>
 </template>
@@ -26,30 +46,53 @@
 <script>
 export default {
   props: {
+    // comment: { required: true },
+    type: {
+      default: "root"
+    },
+    has_dialog: {
+      default: false
+    },
+    id: {
+      required: true
+    },
     owner: {
       required: true
     },
     content: {
       required: true
     },
-    parent_owner: {
+    reply_to: {
       default: () => ({})
     },
-    likes: {
+    vote_count: {
       required: true
     },
     child_comment_count: {
       default: 0
+    },
+    voted: {
+      default: false
     }
   },
   data() {
     return {
-      showChildren: false
+      reply_content: "",
+      show_editor: false,
+      placeholder: "请输入内容"
     };
   },
   computed: {
     showReplyTo() {
-      return this.parent_owner == {};
+      return this.reply_to == {};
+    }
+  },
+  methods: {
+    like($event) {
+      console.log($event);
+      // this.is_voted = true;
+      // $event.toElement.style.color = "#ff7242";
+      this.$emit("like", this.type, this.id);
     }
   }
 };
@@ -66,5 +109,13 @@ export default {
 
 .comment-content, .comment-footer {
   margin: 0 0 4px 33px;
+}
+
+.hover-btn {
+  opacity: 0;
+
+  &:hover {
+    opacity: 1;
+  }
 }
 </style>

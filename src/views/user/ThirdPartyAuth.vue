@@ -27,7 +27,6 @@ export default {
         this_.$message.error("错误\n" + err.data);
       }
     );
-    // this.$router.replace("/");
   }
 };
 </script>
